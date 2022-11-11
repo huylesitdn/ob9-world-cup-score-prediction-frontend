@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import './i18n';
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 import Home from "./pages/Home";
