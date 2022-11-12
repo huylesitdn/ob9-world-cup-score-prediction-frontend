@@ -25,6 +25,8 @@ const Home = () => {
 
 
   const getInitialData = () => {
+    setLoading(true);
+    
     const locale = i18n.language.split('-')[0]
     const query = qs.stringify({
       populate: 'deep',
