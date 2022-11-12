@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_ACCESS_TOKEN } from './constants'
 
 const getToken = () => {
-    return ''
+    return API_ACCESS_TOKEN
 }
 
 class AxiosService {

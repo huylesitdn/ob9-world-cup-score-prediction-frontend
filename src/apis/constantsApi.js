@@ -1,4 +1,3 @@
-export const URL_SITE = process.env.REACT_APP_API_URL || "https://world-cup-score-prediction.herokuapp.com/api/";
+import { API_URL } from 'utils/constants'
 
-
-export const API_GET_LAST_MATCHES = URL_SITE + "matches";
+export const API_GET_LAST_MATCHES = API_URL + "/matches";

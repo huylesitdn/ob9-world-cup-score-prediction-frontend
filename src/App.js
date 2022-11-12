@@ -11,7 +11,6 @@ const Footer = React.lazy(() => import('components/layouts/Footer'));
 
 
 const App = () => {
-  console.log('===123123=')
   return (
     <React.Suspense falling={<div>Loading...</div>}>
       <Header />

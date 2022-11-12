@@ -9,6 +9,10 @@ const routers = [
     element: <Home />,
   },
   {
+    path: "/:slug",
+    element: <Home />,
+  },
+  {
     path: "*",
     element: "Not Found",
   },

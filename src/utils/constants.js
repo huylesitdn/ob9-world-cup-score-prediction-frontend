@@ -1,0 +1,3 @@
+export const BACKEND_URL = process.env.REACT_APP_API_URL || "https://world-cup-score-prediction.herokuapp.com";
+export const API_URL = process.env.REACT_APP_API_URL || "https://world-cup-score-prediction.herokuapp.com/api";
+export const API_ACCESS_TOKEN = 'bfe69f1169079d8caaf50cc80696dd2624fe62e92f179c16c9c6f9e9a815ee56ae92cc654b6182230ec273eab2e4e8451650939a490a085a6bcba874a9965199d7cf68928d8ffaa66d42a6970c381b6d3bf9d932ef27d801029653aa416853981af2b84a813519f142c1ce4aa48b69b604afa5cc0f78ae8c198eb1628d75b228'
