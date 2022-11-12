@@ -25,9 +25,10 @@ const Home = () => {
 
 
   const getInitialData = () => {
+    const locale = i18n.language.split('-')[0]
     const query = qs.stringify({
       populate: 'deep',
-      locale: i18n.language,
+      locale: locale,
       filters: {
         slug: {
           $eq: slug,
@@ -54,6 +55,10 @@ const Home = () => {
 
   const renderLoading = () => {
     return "Loading ...."
+  }
+
+  const handleFormChange = (e) => {
+    console.log(e)
   }
 
   const renderMatch = () => {
@@ -87,8 +92,8 @@ const Home = () => {
                     <div className="match-section__item__form__teams__team">
                       <img src={team_1_url} alt={team_1_name} />
                       <div>{team_1_name}</div>
-                      <select className="form-select w-auto" name="team_score_1">
-                        <option selected>Open this select menu</option>
+                      <select className="form-select w-auto" name="team_score_1" value="" onChange={handleFormChange}>
+                        <option>Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -98,8 +103,8 @@ const Home = () => {
                     <div className="match-section__item__form__teams__team">
                       <img src={team_2_url} alt={team_2_name} />
                       <div>{team_2_name}</div>
-                      <select className="form-select w-auto" name="team_score_2">
-                        <option selected>Open this select menu</option>
+                      <select className="form-select w-auto" name="team_score_2" value="" onChange={handleFormChange}>
+                        <option>Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -107,17 +112,17 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="match-section__item__form__username">
-                    <a href="#" target="_blank" class="btn btn-link">{t('Terms_Conditions')}</a>
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" name="user_name" />
-                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">{t('Submit')}</button>
+                    <a href="#" target="_blank" className="btn btn-link">{t('Terms_Conditions')}</a>
+                    <div className="input-group">
+                      <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" name="user_name" />
+                      <button className="btn btn-outline-secondary" type="button" id="button-addon2">{t('Submit')}</button>
                     </div>
                   </div>
                   <div className="match-section__item__form__action">
                     <div>
-                      <a href="#" target="_blank" class="btn btn-link">{t('Not_yet_a_member')}</a>
+                      <a href="#" target="_blank" className="btn btn-link">{t('Not_yet_a_member')}</a>
                     </div>
-                    <button type="submit" class="btn btn-warning">{t('sign_up_here')}</button>
+                    <button type="submit" className="btn btn-warning">{t('sign_up_here')}</button>
                   </div>
                 </form>
               </div>
