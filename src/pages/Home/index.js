@@ -10,9 +10,9 @@ function Home() {
     i18n.changeLanguage(lng);
   };
 
-  console.log('======')
-
+  
   useEffect(()=> {
+    console.log('======')
     getData();
   }, [])
 
