@@ -7,6 +7,18 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // have a look at the Quick start guide 
 // for passing in lng and translations on init
 
+export const DEFAULT_LOCALES = [
+  { name: "English", code: "en" },
+  { name: "普通话", code: "zh" }
+];
+
+const DEFAULT_LANGUAGE = "en";
+
+window.__AVAILABLE_LOCALES__ = DEFAULT_LOCALES;
+
+export const AVAILABLE_LOCALES =
+  window.__AVAILABLE_LOCALES__ || DEFAULT_LOCALES;
+
 i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
   // learn more: https://github.com/i18next/i18next-http-backend
@@ -20,13 +32,14 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: 'en',
-    debug: true,
+    fallbackLng: DEFAULT_LANGUAGE,
+    debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     }
   });
 
+window.i18n = i18n;
 
 export default i18n;

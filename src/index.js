@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+function App() {
+  console.log('8888')
+  return <div>{console.log('7777777')} Hello World</div>;
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

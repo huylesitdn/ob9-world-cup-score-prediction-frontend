@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
 import { useTranslation } from "react-i18next";
+
+import { getLastMatches } from "apis/index"
 
 function Home() {
   const { t, i18n } = useTranslation();
@@ -6,6 +9,19 @@ function Home() {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
+  console.log('======')
+
+  useEffect(()=> {
+    getData();
+  }, [])
+
+
+  const getData = () => {
+    getLastMatches().then(res => {
+      console.log(res)
+    })
+  }
 
   return (
     <div className="home">

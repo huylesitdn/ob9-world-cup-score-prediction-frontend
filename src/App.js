@@ -1,35 +1,31 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
-import Header from "./components/layouts/Header";
-import Footer from "./components/layouts/Footer";
-import Home from "./pages/Home";
+import './App.css';
+import routers from './routers';
 
-const routers = [
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "*",
-    element: "Not Found",
-  },
-];
+const Header = React.lazy(() => import('components/layouts/Header'));
+const Footer = React.lazy(() => import('components/layouts/Footer'));
 
-function App() {
+
+const App = () => {
+  console.log('===123123=')
   return (
-    <div>
+    <React.Suspense falling={<div>Loading...</div>}>
       <Header />
-      <BrowserRouter>
-        <Routes>
-          {routers.map((router, k) => (
-            <Route {...router} key={k} />
-          ))}
-        </Routes>
-      </BrowserRouter>
+      <div className="main">
+        <BrowserRouter>
+          <Routes>
+            {routers.map((router, k) => (
+              <Route {...router} key={k} />
+            ))}
+          </Routes>
+        </BrowserRouter>
+      </div>
       <Footer />
-    </div>
+    </React.Suspense>
   );
 }
 
