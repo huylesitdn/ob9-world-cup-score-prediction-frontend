@@ -54,8 +54,14 @@
       }
 
       &__form {
-        padding: 15px;
-        margin-top: 30px;
+        padding: 20px 50px 15px;
+        margin-top: 20px;
+        position: relative;
+
+        box-shadow: 1px 7px 20px -1px rgba(255, 255, 255, 0.5);
+        -webkit-box-shadow: 1px 7px 20px -1px rgba(255, 255, 255, 0.5);
+        -moz-box-shadow: 1px 7px 20px -1px rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
 
         &__teams {
           display: flex;
@@ -68,10 +74,61 @@
             flex-direction: column;
             place-content: center;
             place-items: center;
-            gap: 10px;
+            gap: 5px;
 
-            img {
+            &__logo {
               max-height: 100px;
+            }
+
+            &__name {
+              font-size: 18px;
+              font-weight: 500;
+              text-transform: uppercase;
+            }
+
+            &__select {
+              background-image: none;
+              padding: 5px;
+              text-align: center;
+              background-color: transparent;
+              color: #fff;
+              font-size: 25px;
+              font-weight: 700;
+              line-height: 25px;
+              border-radius: 0;
+              min-width: 120px;
+              border-width: 2px;
+              font-family: 'Aldo the Apache';
+              font-style: normal;
+
+              &:focus {
+                box-shadow: none;
+              }
+            }
+
+            &__help-text {
+              font-size: 12px;
+              text-transform: uppercase;
+              font-style: italic;
+              background-color: #fff;
+              color: #5a7ef7;
+              padding: 0 3px;
+              width: 100%;
+              text-align: center;
+              position: relative;
+              margin-top: 5px;
+
+              &::after {
+                content: "";
+                position: absolute;
+                left: 45%;
+                top: -7px;
+                width: 0;
+                height: 0;
+                border-left: solid 5px transparent;
+                border-right: solid 5px transparent;
+                border-bottom: solid 7px #fff;
+              }
             }
           }
 
@@ -82,9 +139,75 @@
           }
         }
 
-        &__username {}
+        &__username {
+          margin-top: 20px;
 
-        &__action {}
+          .terms-link {
+            background: #5a7ef7;
+            color: #fff;
+            text-transform: uppercase;
+            border-radius: 0;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 3px 5px;
+            float: right;
+            margin-right: 20px;
+          }
+
+          .input-group {
+            border-radius: 5px;
+            border: 5px solid #fff;
+
+            input {
+              background: #414141;
+              border-radius: 0;
+              border: none;
+              text-align: center;
+              font-weight: 700;
+              color: #fff;
+              font-size: 16px;
+
+              &::placeholder {
+                color: #929292;
+              }
+
+              &:focus {
+                box-shadow: none;
+              }
+            }
+
+            button {
+              border-radius: 0;
+              border: none;
+              border-left: 5px solid #fff;
+              font-size: 16px;
+              font-weight: 700;
+              text-transform: uppercase;
+              color: #2e2e2e;
+            }
+          }
+        }
+
+        &__action {
+          text-align: center;
+          margin-top: 5px;
+
+          .btn {
+            &-link {
+              color: #fff;
+              text-transform: uppercase;
+              text-decoration: none;
+            }
+
+            &-warning {
+              border-radius: 0;
+              text-transform: uppercase;
+              font-size: 16px;
+              font-weight: 700;
+            }
+          }
+        }
       }
     }
   }

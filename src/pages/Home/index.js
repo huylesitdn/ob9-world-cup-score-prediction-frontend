@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
-import { get } from 'lodash';
+import { get, range } from 'lodash';
 import qs from "qs";
 import moment from "moment";
 
@@ -18,6 +18,11 @@ const Home = () => {
 
   const [match, setMatch] = useState();
   const [loading, setLoading] = useState(true);
+  const [formValue, setFormValue] = useState({
+    team_score_1: "",
+    team_score_2: "",
+    user_name: ""
+  });
 
   useEffect(()=> {
     i18n && i18n.language && getInitialData();
@@ -60,6 +65,12 @@ const Home = () => {
   }
 
   const handleFormChange = (e) => {
+    const _name = e.target.name;
+    const _value = e.target.value;
+    setFormValue({
+      ...formValue,
+      [_name]: _value
+    })
     console.log(e)
   }
 
@@ -92,32 +103,30 @@ const Home = () => {
                 <form className="match-section__item__form">
                   <div className="match-section__item__form__teams">
                     <div className="match-section__item__form__teams__team">
-                      <img src={team_1_url} alt={team_1_name} />
-                      <div>{team_1_name}</div>
-                      <select className="form-select w-auto" name="team_score_1" value="" onChange={handleFormChange}>
-                        <option>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      <img className="match-section__item__form__teams__team__logo" src={team_1_url} alt={team_1_name} />
+                      <div className="match-section__item__form__teams__team__name">{team_1_name}</div>
+                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_1" value={formValue.team_score_1} onChange={handleFormChange}>
+                        <option>?</option>
+                        {range(1, 11).map((i) => <option value={i}>{i}</option>)}
                       </select>
+                      <div className="match-section__item__form__teams__team__help-text">{t('prediction_here')}</div>
                     </div>
                     <div className="match-section__item__form__teams__vs">{t('VS')}</div>
                     <div className="match-section__item__form__teams__team">
-                      <img src={team_2_url} alt={team_2_name} />
-                      <div>{team_2_name}</div>
-                      <select className="form-select w-auto" name="team_score_2" value="" onChange={handleFormChange}>
-                        <option>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      <img className="match-section__item__form__teams__team__logo" src={team_2_url} alt={team_2_name} />
+                      <div className="match-section__item__form__teams__team__name">{team_2_name}</div>
+                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_2" value={formValue.team_score_2} onChange={handleFormChange}>
+                        <option>?</option>
+                        {range(1, 11).map((i) => <option value={i}>{i}</option>)}
                       </select>
+                      <div className="match-section__item__form__teams__team__help-text">{t('prediction_here')}</div>
                     </div>
                   </div>
                   <div className="match-section__item__form__username">
-                    <a href="#" target="_blank" className="btn btn-link">{t('Terms_Conditions')}</a>
+                    <a href="#" target="_blank" className="btn btn-link terms-link">{t('Terms_Conditions')}</a>
                     <div className="input-group">
-                      <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" name="user_name" />
-                      <button className="btn btn-outline-secondary" type="button" id="button-addon2">{t('Submit')}</button>
+                      <input type="text" className="form-control" placeholder={t('username')} name="user_name" value={formValue.user_name} onChange={handleFormChange} />
+                      <button className="btn btn-warning" type="button" id="button-addon2">{t('Submit')}</button>
                     </div>
                   </div>
                   <div className="match-section__item__form__action">
