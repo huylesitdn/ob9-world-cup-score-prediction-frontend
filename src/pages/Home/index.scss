@@ -13,6 +13,11 @@
   }
 
   .avatar-section {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    flex-direction: column;
+
     &__avatar {
       max-width: 100%;
     }
@@ -210,6 +215,140 @@
           }
         }
       }
+    }
+  }
+
+  .ads {
+    padding: 20px 15px 35px;
+
+    &__left {
+      background-color: #5a7ef7;
+      text-align: center;
+      text-transform: uppercase;
+      min-height: 130px;
+
+      &__items {
+        height: 100%;
+
+        &__item {
+          place-content: center;
+          place-items: center;
+          display: flex;
+          flex-direction: column;
+          padding: 15px;
+
+          &__title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+
+          &__subtitle {
+            font-size: 14px;
+            color: #fffc00;
+          }
+
+          &__subsubtitle {
+            font-size: 14px;
+            color: #fffc00;
+          }
+
+          &__score {
+            display: flex;
+            place-content: space-around;
+            place-items: center;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          &__rank {
+            display: flex;
+            place-content: space-around;
+            place-items: center;
+            width: 100%;
+            margin-bottom: 5px;
+
+            &>div {
+              background-image: url(/assets/images/Aston-Villa/10.png);
+              background-repeat: no-repeat;
+              background-size: contain;
+              min-width: 90px;
+              font-size: 16px;
+              color: #414141;
+            }
+          }
+
+          &__action {
+            .btn {
+              border: none;
+              border-radius: 0;
+              padding: 2px 20px;
+            }
+          }
+        }
+      }
+    }
+
+    &__right {
+      min-height: 130px;
+      background-repeat: no-repeat;
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+        text-align: center;
+
+        &__title {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 25px;
+          color: #ffe036;
+        }
+
+        &__subtitle {
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 500;
+        }
+
+        &__action {
+          margin-top: 5px;
+
+          .btn {
+            border: none;
+            border-radius: 0;
+            padding: 2px 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .more-prediction {
+    position: fixed;
+    right: 0;
+    top: 10%;
+    transform: rotate(180deg);
+    display: flex;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    background-color: #ffe036;
+    padding: 10px 5px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 35px;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.9;
     }
   }
 }

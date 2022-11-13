@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
 import './App.css';
+import 'assets/styles/index.scss';
 import routers from './routers';
 
 const Header = React.lazy(() => import('components/layouts/Header'));

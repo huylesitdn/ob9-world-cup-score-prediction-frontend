@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useTranslation } from "react-i18next";
+import { composeInitialProps, useTranslation } from "react-i18next";
 import { get, range } from 'lodash';
 import qs from "qs";
 import moment from "moment";
@@ -8,7 +8,9 @@ import moment from "moment";
 
 import { BACKEND_URL } from 'utils/constants'
 
-import { getLastMatches } from "apis/index"
+import SuccessModal from 'components/success-modal'
+
+import { getLastMatches, createPredictionChallenges } from "apis/index"
 import './index.scss'
 
 const Home = () => {
@@ -23,6 +25,7 @@ const Home = () => {
     team_score_2: "",
     user_name: ""
   });
+  const [show, setShow] = useState(false);
 
   useEffect(()=> {
     i18n && i18n.language && getInitialData();
@@ -74,8 +77,29 @@ const Home = () => {
     console.log(e)
   }
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValue)
+    const sendData = {
+      data: {
+        ...formValue,
+        match: match.id
+      }
+    }
+    createPredictionChallenges(sendData).then((res) => {
+      console.log(res)
+      if(res.status === 200) {
+        setShow(true);
+        setFormValue({
+          team_score_1: "",
+          team_score_2: "",
+          user_name: ""
+        })
+      }
+    })
+  }
+
   const renderMatch = () => {
-    console.log(match)
     const bg_url = `${BACKEND_URL}${get(match, 'attributes.bg.data.attributes.url')}`;
     const team_avatar_img_url = `${BACKEND_URL}${get(match, 'attributes.avatar.data.attributes.url')}`;
     const title = get(match, 'attributes.title');
@@ -85,7 +109,10 @@ const Home = () => {
     const team_1_name = get(match, 'attributes.football_team_1.data.attributes.name');
     const team_2_url = `${BACKEND_URL}${get(match, 'attributes.football_team_2.data.attributes.logo.data.attributes.url')}`;
     const team_2_name = get(match, 'attributes.football_team_2.data.attributes.name');
-
+    const ads_right_bg = `${BACKEND_URL}${get(match, 'attributes.ads_bg.data.attributes.url')}`;
+    const ads_right_title = get(match, 'attributes.ads_title');
+    const ads_right_subtitle = get(match, 'attributes.ads_subtitle');
+    const ads_right_link = get(match, 'attributes.ads_link');
 
     return (
       <div className="home-page" style={{backgroundImage: `url(${bg_url})`}}>
@@ -100,14 +127,14 @@ const Home = () => {
               <div className="match-section__item">
                 <div className="match-section__item__title" dangerouslySetInnerHTML={{__html: t('PREMIER_LEAGUE_GAME_WEEK_15')}} />
                 <div className="match-section__item__time">{match_time}</div>
-                <form className="match-section__item__form">
+                <form className="match-section__item__form" onSubmit={handleFormSubmit}>
                   <div className="match-section__item__form__teams">
                     <div className="match-section__item__form__teams__team">
                       <img className="match-section__item__form__teams__team__logo" src={team_1_url} alt={team_1_name} />
                       <div className="match-section__item__form__teams__team__name">{team_1_name}</div>
-                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_1" value={formValue.team_score_1} onChange={handleFormChange}>
-                        <option>?</option>
-                        {range(1, 11).map((i) => <option value={i}>{i}</option>)}
+                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_1" value={formValue.team_score_1} onChange={handleFormChange} required>
+                        <option value="">?</option>
+                        {range(1, 11).map((i) => <option value={i} key={i}>{i}</option>)}
                       </select>
                       <div className="match-section__item__form__teams__team__help-text">{t('prediction_here')}</div>
                     </div>
@@ -115,9 +142,9 @@ const Home = () => {
                     <div className="match-section__item__form__teams__team">
                       <img className="match-section__item__form__teams__team__logo" src={team_2_url} alt={team_2_name} />
                       <div className="match-section__item__form__teams__team__name">{team_2_name}</div>
-                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_2" value={formValue.team_score_2} onChange={handleFormChange}>
-                        <option>?</option>
-                        {range(1, 11).map((i) => <option value={i}>{i}</option>)}
+                      <select className="form-select w-auto match-section__item__form__teams__team__select" name="team_score_2" value={formValue.team_score_2} onChange={handleFormChange} required>
+                        <option value="">?</option>
+                        {range(1, 11).map((i) => <option value={i} key={i}>{i}</option>)}
                       </select>
                       <div className="match-section__item__form__teams__team__help-text">{t('prediction_here')}</div>
                     </div>
@@ -125,24 +152,58 @@ const Home = () => {
                   <div className="match-section__item__form__username">
                     <a href="#" target="_blank" className="btn btn-link terms-link">{t('Terms_Conditions')}</a>
                     <div className="input-group">
-                      <input type="text" className="form-control" placeholder={t('username')} name="user_name" value={formValue.user_name} onChange={handleFormChange} />
-                      <button className="btn btn-warning" type="button" id="button-addon2">{t('Submit')}</button>
+                      <input type="text" className="form-control" placeholder={t('username')} name="user_name" value={formValue.user_name} onChange={handleFormChange} required />
+                      <button className="btn btn-warning" type="submit" id="button-addon2">{t('Submit')}</button>
                     </div>
                   </div>
                   <div className="match-section__item__form__action">
                     <div>
                       <a href="#" target="_blank" className="btn btn-link">{t('Not_yet_a_member')}</a>
                     </div>
-                    <button type="submit" className="btn btn-warning">{t('sign_up_here')}</button>
+                    <a href="#" className="btn btn-warning">{t('sign_up_here')}</a>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-7 col-12">ADS Left</div>
-            <div className="col-md-5 col-12">ADS Right</div>
+          <div className="row ads">
+            <div className="col-md-7 col-12 ads__left">
+              <div className="row ads__left__items">
+                <div className="col-6 ads__left__items__item">
+                  <div className="ads__left__items__item__title">{t('Name_League')}</div>
+                  <div className="ads__left__items__item__subtitle">{t('Juventus_vs_juventus')}</div>
+                  <div className="ads__left__items__item__subsubtitle">{t('ads_time')}</div>
+                </div>
+                <div className="col-6 ads__left__items__item">
+                  <div className="ads__left__items__item__score">
+                    <div>1</div>
+                    <div>X</div>
+                    <div>2</div>
+                  </div>
+                  <div className="ads__left__items__item__rank">
+                    <div>2.6</div>
+                    <div>2.6</div>
+                    <div>2.6</div>
+                  </div>
+                  <div className="ads__left__items__item__action">
+                    <a href="#" className="btn btn-warning">{t('Join_Now')}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-5 col-12 ads__right" style={{backgroundImage: `url(${ads_right_bg})`}}>
+              <div className="row h-100">
+                <div className="col-7 offset-5 ads__right__content">
+                  <div className="ads__right__content__title">{ads_right_title}</div>
+                  <div className="ads__right__content__subtitle">{ads_right_subtitle}</div>
+                  <div className="ads__right__content__action">
+                    <a href={ads_right_link} className="btn btn-warning">{t('Join_Now')}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <a href="#" className="more-prediction">{t('More_prediction_Challenges')}</a>
         </div>
       </div>
     )
@@ -154,6 +215,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      {show && <SuccessModal show={show} handleClose={() => setShow(false)}/>}
       {loading ? renderLoading() : renderContent()}
     </div>
   );
