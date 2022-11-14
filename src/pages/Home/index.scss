@@ -6,11 +6,23 @@
   background-size: cover;
   padding-bottom: 30px;
 
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 5px;
+  }
+
   .title {
     font-weight: 900;
     font-size: 40px;
     text-align: center;
     padding: 20px 0;
+
+    @media only screen and (max-width: 1024px) {
+      font-size: 35px;
+    }
+
+    @media only screen and (max-width: 767px) {
+      font-size: 30px;
+    }
   }
 
   .avatar-section {
@@ -33,6 +45,32 @@
       span {
         font-size: 55px;
         font-weight: 900;
+
+        @media only screen and (max-width: 1199px) {
+          font-size: 45px;
+        }
+
+        @media only screen and (max-width: 1024px) {
+          font-size: 40px;
+        }
+
+        @media only screen and (max-width: 767px) {
+          font-size: 35px;
+        }
+      }
+
+      @media only screen and (max-width: 1199px) {
+        font-size: 25px;
+      }
+
+      @media only screen and (max-width: 1024px) {
+        font-size: 20px;
+      }
+
+      @media only screen and (max-width: 767px) {
+        font-size: 20px;
+        line-height: 30px;
+        margin-top: -20px;
       }
     }
   }
@@ -52,6 +90,23 @@
         place-items: center;
         padding: 3px 20px;
         margin-bottom: 5px;
+
+        span {
+          color: #5a7ef7;
+          padding-left: 5px
+        }
+
+        @media only screen and (max-width: 1199px) {
+          width: 100%;
+        }
+
+        @media only screen and (max-width: 767px) {
+          font-size: 25px;
+          line-height: 30px;
+          width: 80%;
+          flex-direction: column;
+          padding: 8px;
+        }
       }
 
       &__time {
@@ -61,7 +116,7 @@
 
       &__form {
         padding: 20px 50px 25px 75px;
-        margin-top: 20px;
+        margin-top: 10px;
         position: relative;
 
         // box-shadow: 0px 11px 15px 0px rgba(255, 255, 255, 0.5);
@@ -74,11 +129,23 @@
         border-bottom-left-radius: 30px;
         border-bottom-right-radius: 30px;
 
+        @media only screen and (max-width: 1199px) {
+          padding: 15px 20px 20px 40px;
+        }
+
+        @media only screen and (max-width: 767px) {
+          background-image: url(/assets/images/match-bg-mb.png);
+        }
+
         &__teams {
           display: flex;
           place-content: space-around;
           place-items: center;
           gap: 10px;
+
+          @media only screen and (max-width: 767px) {
+            flex-direction: column;
+          }
 
           &__team {
             display: flex;
@@ -87,14 +154,29 @@
             place-items: center;
             gap: 5px;
 
+            @media only screen and (max-width: 767px) {
+              flex-direction: row;
+              place-content: space-around;
+              width: 100%;
+            }
+
             &__logo {
               max-height: 100px;
+
+              @media only screen and (max-width: 1199px) {
+                max-height: 70px;
+              }
             }
 
             &__name {
               font-size: 18px;
               font-weight: 500;
               text-transform: uppercase;
+              text-align: center;
+
+              @media only screen and (max-width: 1199px) {
+                font-size: 14px;
+              }
             }
 
             &__select {
@@ -129,7 +211,7 @@
               position: relative;
               margin-top: 5px;
 
-              &::after {
+              .caret {
                 content: "";
                 position: absolute;
                 left: 45%;
@@ -147,6 +229,10 @@
             font-size: 35px;
             font-weight: 700;
             line-height: 30px;
+
+            @media only screen and (max-width: 1199px) {
+              font-size: 30px;
+            }
           }
         }
 
@@ -215,7 +301,8 @@
               border-radius: 0;
               text-transform: uppercase;
               font-size: 16px;
-              font-weight: 700;
+              font-weight: 500;
+              border: none;
             }
           }
         }
@@ -225,6 +312,7 @@
 
   .ads {
     padding: 20px 15px 35px;
+    color: #fff;
 
     &__left {
       background-color: #5a7ef7;
@@ -242,20 +330,40 @@
           flex-direction: column;
           padding: 15px;
 
+          @media only screen and (max-width: 800px) {
+            padding: 10px;
+          }
+
+          @media only screen and (max-width: 525px) {
+            padding: 6px;
+          }
+
           &__title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 500;
             margin-bottom: 5px;
+
+            @media only screen and (max-width: 525px) {
+              font-size: 20px;
+            }
           }
 
           &__subtitle {
             font-size: 14px;
             color: #fffc00;
+
+            @media only screen and (max-width: 525px) {
+              font-size: 12px;
+            }
           }
 
           &__subsubtitle {
             font-size: 14px;
             color: #fffc00;
+
+            @media only screen and (max-width: 525px) {
+              font-size: 12px;
+            }
           }
 
           &__score {
@@ -281,6 +389,16 @@
               min-width: 90px;
               font-size: 16px;
               color: #414141;
+
+              @media only screen and (max-width: 1170px) {
+                min-width: 70px;
+                font-size: 14px;
+              }
+
+              @media only screen and (max-width: 800px) {
+                min-width: 60px;
+                font-size: 12px;
+              }
             }
           }
 
@@ -289,6 +407,10 @@
               border: none;
               border-radius: 0;
               padding: 2px 20px;
+
+              @media only screen and (max-width: 1170px) {
+                font-size: 14px;
+              }
             }
           }
         }
@@ -311,12 +433,20 @@
           font-weight: 600;
           line-height: 25px;
           color: #ffe036;
+
+          @media only screen and (max-width: 800px) {
+            font-size: 13px;
+          }
         }
 
         &__subtitle {
           font-size: 14px;
           line-height: 20px;
           font-weight: 500;
+
+          @media only screen and (max-width: 800px) {
+            font-size: 12px;
+          }
         }
 
         &__action {
@@ -326,6 +456,10 @@
             border: none;
             border-radius: 0;
             padding: 2px 20px;
+
+            @media only screen and (max-width: 1170px) {
+              font-size: 14px;
+            }
           }
         }
       }

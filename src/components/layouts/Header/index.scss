@@ -14,5 +14,13 @@
     img {
       max-height: 65px;
     }
+
+    @media only screen and (max-width: 767px) {
+      gap: 15px;
+    }
+
+    @media only screen and (max-width: 550px) {
+      margin-bottom: 10px;
+    }
   }
 }

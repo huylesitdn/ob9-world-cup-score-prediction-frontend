@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const SuccessModal = (props) => {
+const SuccessModal = ({message, ...props}) => {
 
   return (
     <>
@@ -11,20 +11,16 @@ const SuccessModal = (props) => {
         onHide={props.handleClose}
         backdrop="static"
         keyboard={false}
+        centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
+        <Modal.Body className="bg-success">
+          <div className="text-white mb-4">{message}</div>
+          <div className="text-center">
+            <Button variant="secondary" onClick={props.handleClose}>
+              Close
+            </Button>
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

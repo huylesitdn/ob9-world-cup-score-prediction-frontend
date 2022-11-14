@@ -8,6 +8,13 @@
     img {
       max-height: 75px;
     }
+
+    @media only screen and (max-width: 767px) {
+      height: auto;
+      & > div {
+        text-align: center !important;
+      }
+    }
   }
 
   .copyright {

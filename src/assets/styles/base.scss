@@ -1,9 +1,39 @@
+body {
+  font-size: 14px;
+}
+
 img {
   max-width: 100%;
 }
 
 .btn {
+  font-size: 14px;
+
   &-warning {
     background-color: #ffe035;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
   }
 }

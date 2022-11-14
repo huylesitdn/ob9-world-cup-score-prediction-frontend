@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import social from 'assets/images/Aston-Villa/13.png';
 import team from 'assets/images/Aston-Villa/14.png';
@@ -13,10 +14,10 @@ function Footer() {
       <div className="container">
         <div className="team-logo row justify-content-between align-items-center">
           <div className="col-md-6 col-12">
-            <img className="team-img" src={i18n.language === 'en' ? team : teamZH} alt ="" />
+            <LazyLoadImage className="team-img" src={i18n.language === 'en' ? team : teamZH} alt ="" />
           </div>
           <div className="col-md-6 col-12 text-end">
-            <img className="social-img" src={social} alt ="" />
+            <LazyLoadImage className="social-img" src={social} alt ="" />
           </div>
         </div>
       </div>
