@@ -214,7 +214,7 @@ const Home = () => {
   }
 
   return (
-    <div className="home-page">
+    <div className="home-section">
       {show && <SuccessModal show={show} handleClose={() => setShow(false)}/>}
       {loading ? renderLoading() : renderContent()}
     </div>
