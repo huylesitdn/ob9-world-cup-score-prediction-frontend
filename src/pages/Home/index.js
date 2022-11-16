@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(()=> {
     i18n && i18n.language && getInitialData();
-  }, [i18n, i18n.language])
+  }, [i18n, i18n.language, slug])
 
 
   const getInitialData = () => {
