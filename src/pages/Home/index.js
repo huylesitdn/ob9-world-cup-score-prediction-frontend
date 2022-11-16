@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
-import { get, range } from 'lodash';
+import { get, range, find } from 'lodash';
 import qs from "qs";
 import moment from "moment";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -20,6 +20,7 @@ const Home = () => {
   const slug = get(params, 'slug');
 
   const [match, setMatch] = useState();
+  const [matchs, setMatchs] = useState();
   const [loading, setLoading] = useState(true);
   const [formValue, setFormValue] = useState({
     team_score_1: "",
@@ -41,14 +42,14 @@ const Home = () => {
     const query = qs.stringify({
       populate: 'deep',
       locale: locale,
-      filters: {
-        slug: {
-          $eq: slug,
-        },
-      },
-      pagination: {
-        limit: 1
-      },
+      // filters: {
+      //   slug: {
+      //     $eq: slug,
+      //   },
+      // },
+      // pagination: {
+      //   limit: 1
+      // },
       sort: ['createdAt:desc'],
     }, {
       encodeValuesOnly: true, // prettify URL
@@ -59,7 +60,10 @@ const Home = () => {
       setLoading(false);
       console.log(res)
       if(res.status === 200) {
-        setMatch(get(res, 'data.data[0]'))
+        const _datas = get(res, 'data.data', [])
+        const select_match = slug ? find(_datas, o => o.attributes.slug === slug) : _datas[0];
+        setMatch(select_match)
+        setMatchs(_datas)
       } else {
         setErrorMsg(`${res.status} - ${get(res, 'data.error.message')}`)
       }
@@ -249,7 +253,19 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <a href="/" className="more-prediction">{t('More_prediction_Challenges')}</a>
+          <div className="more-prediction">
+            <a href="/" className="title">{t('More_prediction_Challenges')}</a>
+            <div className="other-match">
+              {
+                matchs.map((value, k) =>
+                  value.id !== match.id && <Link to={`/${get(value, 'attributes.slug')}`}>
+                    <img src={`${BACKEND_URL}${get(value, 'attributes.football_team_1.data.attributes.logo.data.attributes.url')}`} alt={get(value, 'attributes.title')} />
+                    <div>{get(value, 'attributes.title')}</div>
+                  </Link>
+                )
+              }
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -467,32 +467,83 @@
   }
 
   .more-prediction {
-    background-color: #ffe036;
-    padding: 10px 5px;
-    text-decoration: none;
-    color: #000;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 500;
-    min-width: 35px;
-    transition: all 0.3s;
-    display: block;
-    text-align: center;
 
-    &:hover {
-      opacity: 0.9;
+    .title {
+      background-color: #ffe036;
+      padding: 10px 5px;
+      text-decoration: none;
+      color: #000;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 35px;
+      transition: all 0.3s;
+      display: block;
+      text-align: center;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      @media only screen and (min-width: 767px) {
+        transform: rotate(180deg);
+        display: flex;
+        place-content: center;
+        place-items: center;
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+    }
+
+    .other-match {
+      position: relative;
+      height: auto;
+      background: #373737;
+      padding: 29px 2px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      place-content: space-around;
+      place-items: center;
+      gap: 10px;
+
+      img {
+        max-height: 50px;
+      }
+
+      a {
+        color: #fff;
+        font-size: 12px;
+        text-decoration: none;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      @media only screen and (min-width: 767px) {
+        width: 200px;
+      }
+
+      @media only screen and (max-width: 767px) {
+        flex-direction: row;
+      }
     }
 
     @media only screen and (min-width: 767px) {
       position: fixed;
-      right: 0;
-      top: 10%;
-      transform: rotate(180deg);
+      top: 15%;
       display: flex;
-      writing-mode: vertical-lr;
-      text-orientation: mixed;
-      border-bottom-right-radius: 15px;
-      border-top-right-radius: 15px;
+      right: 0;
+      right: -200px;
+      -webkit-transition: right .2s;
+      transition: right .2s;
+
+      &:hover {
+        right: 0;
+      }
     }
   }
 }
