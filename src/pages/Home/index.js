@@ -58,7 +58,7 @@ const Home = () => {
 
     getLastMatches(query).then(res => {
       setLoading(false);
-      console.log(res)
+      console.log(res.data)
       if(res.status === 200) {
         const _datas = get(res, 'data.data', [])
         const select_match = slug ? find(_datas, o => o.attributes.slug === slug) : _datas[0];
@@ -127,6 +127,7 @@ const Home = () => {
     const text_color = get(match, 'attributes.text_color', '#fff');
     const primary_color = get(match, 'attributes.primary_color');
     const secondary_color = get(match, 'attributes.secondary_color');
+    const prediction_here_img = `${BACKEND_URL}${get(match, 'attributes.prediction_here_img.data.attributes.url')}`;
 
     const styles = {
       color: text_color,
@@ -175,10 +176,11 @@ const Home = () => {
                           <option value="">?</option>
                           {range(1, 11).map((i) => <option value={i} key={i}>{i}</option>)}
                         </select>
-                        <div className="match-section__item__form__teams__team__help-text" style={prediction_here__styles}>
+                        <img className="match-section__item__form__teams__team__prediction-here" src={prediction_here_img} alt="" />
+                        {/* <div className="match-section__item__form__teams__team__help-text" style={prediction_here__styles}>
                           {t('prediction_here')}
                           <span className="caret" style={prediction_here__caret__styles}></span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="match-section__item__form__teams__vs">{t('VS')}</div>
@@ -192,10 +194,11 @@ const Home = () => {
                           <option value="">?</option>
                           {range(1, 11).map((i) => <option value={i} key={i}>{i}</option>)}
                         </select>
-                        <div className="match-section__item__form__teams__team__help-text" style={prediction_here__styles}>
+                        <img className="match-section__item__form__teams__team__prediction-here" src={prediction_here_img} alt="" />
+                        {/* <div className="match-section__item__form__teams__team__help-text" style={prediction_here__styles}>
                           {t('prediction_here')}
                           <span className="caret" style={prediction_here__caret__styles}></span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -258,7 +261,7 @@ const Home = () => {
             <div className="other-match">
               {
                 matchs.map((value, k) =>
-                  value.id !== match.id && <Link to={`/${get(value, 'attributes.slug')}`}>
+                  value.id !== match.id && <Link to={`/${get(value, 'attributes.slug')}`} key={k}>
                     <img src={`${BACKEND_URL}${get(value, 'attributes.football_team_1.data.attributes.logo.data.attributes.url')}`} alt={get(value, 'attributes.title')} />
                     <div>{get(value, 'attributes.title')}</div>
                   </Link>

@@ -199,6 +199,11 @@
               }
             }
 
+            &__prediction-here {
+              margin-top: -15px;
+              width: 100%;
+            }
+
             &__help-text {
               font-size: 12px;
               text-transform: uppercase;
@@ -237,7 +242,7 @@
         }
 
         &__username {
-          margin-top: 20px;
+          margin-top: 15px;
 
           .terms-link {
             background: #5a7ef7;
